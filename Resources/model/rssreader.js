@@ -1,5 +1,5 @@
 // alle vars are local, only get is an public method
-exports.get = function(callback) {
+exports.get = function(options) {
 	var client = Ti.Network.createHTTPClient({
 		// on succesful loading:
 		onload : function() {
@@ -12,13 +12,13 @@ exports.get = function(callback) {
 			// parse
 			var myjson = parser.toObject();
 			// callback to caller function
-			callback && callback(myjson.channel.item);
+			options.onsuccess && options.onsuccess(myjson.channel.item);
 		},
 		onerror : function() {
 			console.log(this.error);
 		}
 	});
-	client.open('GET', 'http://www.spiegel.de/politik/index.rss',true);
+	client.open('GET', options.url,true);
 	client.setRequestHeader('User-Agent','My special browser from Hamburg'); // it is only an example
 	// sending empty body (GET):
 	client.send();
