@@ -44,6 +44,11 @@ tabGroup.addTab(tab2);
 // open tab group
 tabGroup.open();
 
+listofnews.addEventListener('click', function(event) {
+	// in event.rowData.spondata is no the paramter for new sub window
+	
+});
+
 // calling of http-client:
 require('model/rssreader').get({
 	url : 'http://www.spiegel.de/politik/index.rss',
@@ -54,7 +59,10 @@ require('model/rssreader').get({
 			var description = rss[i].description;
 			var title = rss[i].title;
 			// creating of empty row:
-			var row = Ti.UI.createTableViewRow();
+			var row = Ti.UI.createTableViewRow({
+				hasChild : true,
+				spondata : rss[i] // here we save the data for sub window
+			});
 			// container for stapeling
 			var container = Ti.UI.createView({
 				left : 100,
