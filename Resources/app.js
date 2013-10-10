@@ -8,19 +8,17 @@ var tabGroup = Titanium.UI.createTabGroup();
 // create base UI tab and root window
 //
 var win1 = Titanium.UI.createWindow({
-	title : 'Tab 1',
+	title : 'Meldungen vom SPIEGEL',
 	backgroundColor : '#fff'
 });
 var listofnews = Ti.UI.createTableView({
-	top : 50,
 	backgroundColor : '#ddd'
-
 });
 win1.add(listofnews);
 
 var tab1 = Titanium.UI.createTab({
 	icon : 'KS_nav_views.png',
-	title : 'Tab 1',
+	title : 'SPIEGEL',
 	window : win1
 });
 //
@@ -49,7 +47,8 @@ tabGroup.addTab(tab2);
 // open tab group
 tabGroup.open();
 
-require('model/getrss').get(function(rss) {
+require('model/rssreader').get(function(rss) {
+	var data = [];
 	for (var i = 0; i < rss.length; i++) {
 		var description = rss[i].description;
 		var title = rss[i].title;
@@ -62,6 +61,7 @@ require('model/getrss').get(function(rss) {
 		container.add(Ti.UI.createLabel({
 			text : title,
 			top : 5,
+			left : 0,
 			color : 'black',
 			font : {
 				fontSize : 20,
@@ -71,6 +71,7 @@ require('model/getrss').get(function(rss) {
 		container.add(Ti.UI.createLabel({
 			text : description,
 			top : 25,
+			left : 0,
 			color : '#333',
 			font : {
 				fontSize : 16
@@ -86,9 +87,9 @@ require('model/getrss').get(function(rss) {
 				image : image
 			}));
 		}
-		listofnews.appendRow(row);
-
+		data.push(row);
 	}
+	listofnews.setData(data);
 
 });
 
