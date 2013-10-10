@@ -70,7 +70,7 @@ require('model/rssreader').get(function(rss) {
 		}));
 		container.add(Ti.UI.createLabel({
 			text : description,
-			top : 25,
+			top : 5,
 			left : 0,
 			color : '#333',
 			font : {
@@ -80,7 +80,7 @@ require('model/rssreader').get(function(rss) {
 		if (rss[i].enclosure) {
 			var image = rss[i].enclosure.url;
 			row.add(Ti.UI.createImageView({
-				top : 0,
+				top : 5,
 				left : 0,
 				width : 90,
 				height : 90,
